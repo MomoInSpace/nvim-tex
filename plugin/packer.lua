@@ -1,3 +1,4 @@
+-- This installs Packcer if not already installed:
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -12,10 +13,9 @@ end
 local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
-  -- My plugins here
-  -- use 'foo1/bar1.nvim'
-  -- use 'foo2/bar2.nvim'
+ 	
+	-- Packer for installing packages:
+	use 'wbthomason/packer.nvim'
   	
   	-- Colorschemes:
 	use 'bluz71/vim-moonfly-colors' 
