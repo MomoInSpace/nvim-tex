@@ -1,6 +1,6 @@
 --Make relative line numbers default. 
 vim.wo.number = true
-vim.wo.relativenumber = true
+vim.wo.relativenumber = false
 
 -- Enable mouse mode.
 vim.o.mouse = 'a'
