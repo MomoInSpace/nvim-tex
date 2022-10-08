@@ -8,3 +8,7 @@ require('basic.colorscheme')
 
 -- Plugin Settings:
 require('plugin.packer') -- This file installs packer automatically, if the file plugin/packer_compiled doesn't exist.
+
+-- All Keymaps should be defined here:
+require('basic.keymaps')
+
