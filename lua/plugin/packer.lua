@@ -20,6 +20,8 @@ return require('packer').startup(function(use)
   	-- Colorschemes:
 	use 'bluz71/vim-moonfly-colors' 
 
+	-- LuaSnips:
+	use({"L3MON4D3/LuaSnip"})
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
