@@ -20,6 +20,13 @@ return require('packer').startup(function(use)
   	-- Colorschemes:
 	use 'bluz71/vim-moonfly-colors' 
 
+	-- LuaSnips:
+	use({"L3MON4D3/LuaSnip"})
+
+	--nvim-cmp (Snippet Engine):
+	use "hrsh7th/nvim-cmp"
+  	use 'hrsh7th/cmp-nvim-lsp'
+ 	use 'saadparwaiz1/cmp_luasnip'
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
@@ -27,4 +34,5 @@ return require('packer').startup(function(use)
     require('packer').sync()
   end
 end)
+
 
