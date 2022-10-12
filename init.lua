@@ -11,6 +11,7 @@ require('plugin.packer') -- This file installs packer automatically, if the file
 require('plugin.luasnips')
 require('plugin.nvim-cmp')
 require('plugin.treesitter')
+require('plugin.VimTeX')
 
 -- All Keymaps should be defined here:
 require('basic.keymaps')
