@@ -28,6 +28,9 @@ return require('packer').startup(function(use)
   	use 'hrsh7th/cmp-nvim-lsp'
  	use 'saadparwaiz1/cmp_luasnip'
 
+	--Treesitter: 
+	use "nvim-treesitter/nvim-treesitter"
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
