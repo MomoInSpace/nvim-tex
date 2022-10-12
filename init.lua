@@ -13,3 +13,6 @@ require('plugin.luasnips')
 -- All Keymaps should be defined here:
 require('basic.keymaps')
 
+-- Snippets from Luasnips:
+require('snippets.latex')
+
