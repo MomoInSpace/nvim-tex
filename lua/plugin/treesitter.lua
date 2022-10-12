@@ -1,0 +1,1 @@
+-- treesitter setting file

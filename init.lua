@@ -10,6 +10,7 @@ require('basic.colorscheme')
 require('plugin.packer') -- This file installs packer automatically, if the file plugin/packer_compiled doesn't exist.
 require('plugin.luasnips')
 require('plugin.nvim-cmp')
+require('plugin.treesitter')
 
 -- All Keymaps should be defined here:
 require('basic.keymaps')
