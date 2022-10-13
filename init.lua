@@ -9,10 +9,13 @@ require('basic.colorscheme')
 -- Plugin Settings:
 require('plugin.packer') -- This file installs packer automatically, if the file plugin/packer_compiled doesn't exist.
 require('plugin.luasnips')
+require('plugin.nvim-cmp')
+require('plugin.treesitter')
+require('plugin.VimTeX')
 
 -- All Keymaps should be defined here:
 require('basic.keymaps')
 
 -- Snippets from Luasnips:
-require('snippets.latex')
-
+local latex_init = require('snippets.latex.init')
+latex_init()
