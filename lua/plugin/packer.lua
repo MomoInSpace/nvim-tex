@@ -28,6 +28,32 @@ return require('packer').startup(function(use)
   	use 'hrsh7th/cmp-nvim-lsp'
  	use 'saadparwaiz1/cmp_luasnip'
 
+	--Vimtex:
+	use 'lervag/vimtex'
+
+	-- Treesitter
+	use 'nvim-treesitter/nvim-treesitter'
+
+	use {
+		"jczhang02/luasnips-mathtex-snippets",
+		config = function()
+			vim.cmd([[packadd LuaSnip]])
+			vim.cmd([[packadd vimtex]])
+			vim.cmd([[packadd vim-markdown]])
+			require("luasnip-latex-snippets").setup({use_treesitter = true})
+			-- or setup({ use_treesitter = true })
+		end,
+		ft = { "tex", "markdown" },
+	}
+	use{
+		"preservim/vim-markdown",
+		opt = true,
+		ft = "markdown",
+		config = function()
+			vim.cmd([[let g:vim_markdown_math = 1]])
+		end,
+	}
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
