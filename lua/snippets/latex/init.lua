@@ -9,7 +9,7 @@ local M = {}
 
 
 local default_opts = {
-  use_treesitter = false,
+  use_treesitter = true,
 }
 
 M.setup = function(opts)
