@@ -45,4 +45,6 @@ cmp.setup({
   -- ... Your other configuration ...
 })
 
+vim.api.nvim_set_keymap("i", "<C-j>", "<Plug>luasnip-next-choice", {script = luasnip.choice_active()}) 
+vim.api.nvim_set_keymap("i", "<C-k>", "<Plug>luasnip-prev-choice", {script = luasnip.choice_active()}) 
 
