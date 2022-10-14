@@ -18,4 +18,4 @@ require('basic.keymaps')
 
 -- Snippets from Luasnips:
 local latex_init = require('snippets.latex.init')
-latex_init()
+--latex_init()
