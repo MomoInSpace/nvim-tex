@@ -23,5 +23,5 @@ end
 
 ls.add_snippets("tex", autosnippets, {
 type = "autosnippets",
-default_priority = 0,:
+default_priority = 0,
 })
