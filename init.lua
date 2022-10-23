@@ -17,5 +17,5 @@ require('plugin.VimTeX')
 require('basic.keymaps')
 
 -- Snippets from Luasnips:
-local latex_init = require('snippets.latex.init')
+local latex_init = require('snippets.init')
 --latex_init()
