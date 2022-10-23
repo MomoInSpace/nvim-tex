@@ -169,12 +169,12 @@ end
 ls.add_snippets("tex",auto_snippets, {
 	default_priority = 0,
 	type = "autosnippets",
-	key = "special_characters_auto"
+	key = "environments_auto"
 })
 
 ls.add_snippets("tex",tab_snippets, {
 	default_priority = 0,
-	key = "special_characters_tab"
+	key = "environments_tab"
 })
 
 
