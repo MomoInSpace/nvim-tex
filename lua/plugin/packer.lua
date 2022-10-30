@@ -34,6 +34,16 @@ return require('packer').startup(function(use)
 	-- VimTeX
 	use "lervag/vimtex"
 
+	-- Easier Commenting: 
+	use {
+		'numToStr/Comment.nvim',
+		config = function()
+			require('Comment').setup()
+		end
+	}
+
+	use 'dense-analysis/ale'
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
