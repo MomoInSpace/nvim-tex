@@ -13,6 +13,9 @@ require('plugin.nvim-cmp')
 require('plugin.treesitter')
 require('plugin.VimTeX')
 
+-- ALE Linter:
+require("plugin.ale_lint")
+
 -- Comments:
 require("plugin.comment")
 
