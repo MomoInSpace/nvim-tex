@@ -33,6 +33,9 @@ return require('packer').startup(function(use)
 	use 'onsails/lspkind-nvim' -- vscode-like pictograms for neovim lsp completion items
 	use 'danymat/neogen'
 
+	--Git:
+	use 'tpope/vim-fugitive'
+
 
 	-- LSP related packages:
 	use 'williamboman/nvim-lsp-installer'
@@ -55,6 +58,7 @@ return require('packer').startup(function(use)
 		end
 	}
 
+	-- Linter
 	use 'dense-analysis/ale'
 
   -- Automatically set up your configuration after cloning packer.nvim
