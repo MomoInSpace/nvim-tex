@@ -17,8 +17,9 @@ return require('packer').startup(function(use)
 	-- Packer for installing packages:
 	use 'wbthomason/packer.nvim'
   	
-  	-- Colorschemes:
+  	-- Colorschemes and visual plugins:
 	use 'bluz71/vim-moonfly-colors' 
+  	use 'itchyny/lightline.vim' -- Fancier statusline
 
 	-- LuaSnips:
 	use({"L3MON4D3/LuaSnip"})
@@ -28,8 +29,20 @@ return require('packer').startup(function(use)
   	use 'hrsh7th/cmp-nvim-lsp'
  	use 'saadparwaiz1/cmp_luasnip'
 
+	-- Completion window:
+	use 'onsails/lspkind-nvim' -- vscode-like pictograms for neovim lsp completion items
+	use 'danymat/neogen'
+
+
+	-- LSP related packages:
+	use 'williamboman/nvim-lsp-installer'
+
 	--Treesitter: 
 	use "nvim-treesitter/nvim-treesitter"
+
+	-- UI to select things (files, grep results, open buffers...)
+	use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+	use 'nvim-telescope/telescope-symbols.nvim'
 
 	-- VimTeX
 	use "lervag/vimtex"
