@@ -13,12 +13,12 @@ end
 local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
- 	
+
 	-- Packer for installing packages:
 	use 'wbthomason/packer.nvim'
-  	
+
   	-- Colorschemes and visual plugins:
-	use 'bluz71/vim-moonfly-colors' 
+	use 'bluz71/vim-moonfly-colors'
   	use 'itchyny/lightline.vim' -- Fancier statusline
 
 	-- LuaSnips:
@@ -37,10 +37,19 @@ return require('packer').startup(function(use)
 	use 'tpope/vim-fugitive'
 
 
-	-- LSP related packages:
-	use 'williamboman/nvim-lsp-installer'
+	-- MASON related packages:
+	use {
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+		"neovim/nvim-lspconfig",
+	}
 
-	--Treesitter: 
+		-- Mason-related:
+		use 'mfussenegger/nvim-lint'
+		use 'mhartington/formatter.nvim'
+		use 'mfussenegger/nvim-dap'
+
+	--Treesitter:
 	use "nvim-treesitter/nvim-treesitter"
 
 	-- UI to select things (files, grep results, open buffers...)
@@ -50,7 +59,7 @@ return require('packer').startup(function(use)
 	-- VimTeX
 	use "lervag/vimtex"
 
-	-- Easier Commenting: 
+	-- Easier Commenting:
 	use {
 		'numToStr/Comment.nvim',
 		config = function()
@@ -58,8 +67,6 @@ return require('packer').startup(function(use)
 		end
 	}
 
-	-- Linter
-	use 'dense-analysis/ale'
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
@@ -67,5 +74,3 @@ return require('packer').startup(function(use)
     require('packer').sync()
   end
 end)
-
-

@@ -13,14 +13,20 @@ require('plugin.nvim-cmp')
 require('plugin.treesitter')
 require('plugin.VimTeX')
 
--- ALE Linter:
-require("plugin.ale_lint")
+-- nvim-lint Linter:
+require("plugin.nvim_lint")
 
 -- Comments:
 require("plugin.comment")
 
 -- All Keymaps should be defined here:
 require('basic.keymaps')
+
+--LSP:
+require("plugin.mason")
+
+-- Formatter:
+require("plugin.formatter")
 
 
 
