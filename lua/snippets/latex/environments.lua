@@ -145,7 +145,7 @@ local math_envs_tab = {
 }
 
 for _, snip in ipairs(math_envs_tab) do
-    snip.wordTrig = false
+    snip.wordTrig = true
 	table.insert(tab_snippets,snip)
 end
 
@@ -157,12 +157,51 @@ local math_envs_auto = {
 for _, snip in ipairs(math_envs_auto) do
     snip.condition = not_math--pipe({ is_math })
     snip.show_condition = not_math
-    snip.wordTrig = false
+    snip.wordTrig = true
 	table.insert(auto_snippets,snip)
 end
 
 -- }})
 
+--# sections -----------------------------------------({{
+
+local sections_tab = {
+	-- part:
+	parse({trig = "part", name = "part"},"\\part{$1}\n$0"),
+	-- chapter:
+	parse({trig = "chap", name = "chapter"},"\\chapter{$1}\n$0"),
+	-- section:
+	parse({trig = "sec", name = "section"},"\\section{$1}\n$0"),
+	-- subsection:
+	parse({trig = "sub", name = "subsection"},"\\subsection{$1}\n$0"),
+	-- subsubsection:
+	parse({trig = "subsub", name = "subsubsection"},"\\subsubsection{$1}\n$0"),
+}
+
+for key, snip in ipairs(sections_tab) do
+	snip.priority = key
+    snip.wordTrig = false
+	table.insert(tab_snippets,snip)
+end
+-- }})
+
+--# Textblocks -----------------------------------------({{
+
+local text_snippets_tab = {
+	-- emphasize
+	parse({trig = "emp", name = "emphasize"},"\\emph{$1} $0"),
+	-- textbf
+	parse({trig = "bf", name = "textbf"},"\\textbf{$1} $0"),
+	parse({trig = "ref", name = "ref"},"\\ref{$1} $0"),
+	parse({trig = "eref", name = "ref equation"},"\\eqref{$1} $0"),
+}
+
+for key, snip in ipairs(text_snippets_tab) do
+	snip.priority = key
+    snip.wordTrig = false
+	table.insert(tab_snippets,snip)
+end
+-- }})
 
 -- }})
 

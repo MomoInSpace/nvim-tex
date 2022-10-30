@@ -9,6 +9,9 @@
 -- All special characters are mapped in this file:
 require("snippets.latex.special_characters")
 
+-- All special mathemtaical operations are mapped in this file:
+require("snippets.latex.math_ops")
+
 -- All environments are mapped in this file:
 require("snippets.latex.environments")
 
@@ -17,6 +20,9 @@ require("snippets.latex.drawing_plotting")
 
 -- Drawing Snippets:
 require("snippets.latex.templates.document_std_template")
+
+-- Modifier: all snippets with the form \form{surrounding}
+require("snippets.latex.modyfier")
 
 
 local ls = require("luasnip")
