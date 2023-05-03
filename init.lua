@@ -13,8 +13,26 @@ require('plugin.nvim-cmp')
 require('plugin.treesitter')
 require('plugin.VimTeX')
 
+-- nvim-lint Linter:
+require("plugin.nvim_lint")
+
+-- Comments:
+require("plugin.comment")
+
 -- All Keymaps should be defined here:
 require('basic.keymaps')
+
+--LSP:
+require("plugin.mason")
+
+-- Formatter:
+require("plugin.formatter")
+
+-- Folding:
+require("plugin.nvim_ufo")
+
+
+
 
 -- Snippets from Luasnips:
 local latex_init = require('snippets.init')

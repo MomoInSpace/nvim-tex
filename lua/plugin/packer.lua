@@ -13,12 +13,13 @@ end
 local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
- 	
+
 	-- Packer for installing packages:
 	use 'wbthomason/packer.nvim'
-  	
-  	-- Colorschemes:
-	use 'bluz71/vim-moonfly-colors' 
+
+  	-- Colorschemes and visual plugins:
+	use 'bluz71/vim-moonfly-colors'
+  	use 'itchyny/lightline.vim' -- Fancier statusline
 
 	-- LuaSnips:
 	use({"L3MON4D3/LuaSnip"})
@@ -28,11 +29,55 @@ return require('packer').startup(function(use)
   	use 'hrsh7th/cmp-nvim-lsp'
  	use 'saadparwaiz1/cmp_luasnip'
 
-	--Treesitter: 
+	-- Completion window:
+	use 'onsails/lspkind-nvim' -- vscode-like pictograms for neovim lsp completion items
+	use 'danymat/neogen'
+
+	--Git:
+	use 'tpope/vim-fugitive'
+
+
+	-- MASON related packages:
+	use {
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+		"neovim/nvim-lspconfig",
+	}
+
+		-- Mason-related:
+		use 'mfussenegger/nvim-lint'
+		use 'mhartington/formatter.nvim'
+		use 'mfussenegger/nvim-dap'
+
+	--Treesitter:
 	use "nvim-treesitter/nvim-treesitter"
+
+	-- UI to select things (files, grep results, open buffers...)
+	use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+	use 'nvim-telescope/telescope-symbols.nvim'
 
 	-- VimTeX
 	use "lervag/vimtex"
+
+	-- Easier Commenting:
+	use {
+		'numToStr/Comment.nvim',
+		config = function()
+			require('Comment').setup()
+		end
+	}
+
+	-- Markdown Preview:
+	use({
+		"iamcco/markdown-preview.nvim",
+		run = function() vim.fn["mkdp#util#install"]() end,
+	})
+
+	use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+
+	-- Folding:
+	use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
@@ -40,5 +85,3 @@ return require('packer').startup(function(use)
     require('packer').sync()
   end
 end)
-
-

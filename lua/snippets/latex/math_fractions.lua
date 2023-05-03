@@ -57,7 +57,7 @@ local math_wrA = {
   frac,
 
   s({
-    trig = "([%a])(%d)",
+    trig = "([\\%a]+)(%d)",
     name = "auto subscript",
   }, {
     f(function(_, snip)
