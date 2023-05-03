@@ -35,54 +35,92 @@ local auto_snippets = {}
 local tab_snippets = {}
 
 --# Start of Snippets -----------------------------------------({{
-	
+
 -- # basic operators------------------------------------({{
-basic_operators = {	
+basic_operators = {
+	parse({trig = "td", name = "to the" }, "^{$1} $0"),
+	parse({trig = " td", name = "to the apart" }, "^{$1} $0"),
+	parse({trig = "tq", name = "to the" }, "\\sqrt{$1} $0"),
+	parse({trig = "ttq", name = "to the" }, "\\sqrt[$1]{$2} $0"),
+
+	parse({trig = ";d", name = "down apart" }, "_{$1} $0"),
+	parse({trig = " ;d", name = "down apart afar" }, "_{$1} $0"),
+	parse({trig = ";t", name = "down apart" }, "_{\\text{$1}} $0"),
+	parse({trig = " ;t", name = "down apart afar" }, "_{\\text{$1}} $0"),
+	parse({trig = " ^", name = "up apart" }, "^$0"),
+	parse({trig = "__", name = "down" }, "_{$1} $0"),
+	parse({trig = " _", name = "down afar" }, "_"),
+	parse({trig = "_T_", name = "down" }, "_{\\text{$1}} $0"),
 	parse({trig = "**",name = 'Cdots'},"\\cdot"),
+
+}
+
+for key, snip in ipairs(basic_operators) do
+	snip.priority = key + 1000
+    snip.condition = pipe({ is_math, no_backslash })
+    snip.show_condition = is_math
+    snip.wordTrig = false
+	table.insert(auto_snippets,snip)
+end
+
+word_trig_operators = {
 	parse({trig = "xx",name = 'times'},"\\times"),
 
 	parse({trig = "...",name = 'ldots'},"\\ldots"),
 	parse({trig = "=>",name = 'implies'},"\\implies"),
 	parse({trig = "<=",name = 'implied by'},"\\impliedby"),
-	parse({trig = "iff",name = 'iff'},"\\iff"),
+	parse({trig = "<>",name = 'iff'},"\\iff"),
 	parse({trig = "=n",name = 'unequals'},"\\not="),
 	parse({trig = "=d",name = 'define'},"\\coloneqq"),
+	parse({trig = "=!",name = 'overset'},"\\overset{${1:!}}{=}$0"),
+
 	parse({trig = "<=",name = 'lower equal'},"\\le"),
 	parse({trig = ">=",name = 'lower equal'},"\\ge"),
 	parse({trig = ">>",name = 'gg'},"\\gg"),
 	parse({trig = "<<",name = 'll'},"\\ll"),
-	
+	parse({trig = "o*",name = 'Verknuepfung'},"\\circ"),
+
 	parse({trig = "~~",name = 'sim'},"\\sim"),
 	parse({trig = "=s",name = 'sim2'},"\\sim"),
 
 	parse({trig = "cc",name = 'subset'},"\\subset"),
 	parse({trig = "qq",name = 'quad'},"\\quad"),
 	parse({trig = "tto",name = 'to'},"\\to"),
+
 	parse({trig = "->",name = 'to'},"\\to"),
+	parse({trig = "too",name = 'to'},"\\to"),
+	parse({trig = "dra",name = 'down to'},"\\searrow"),
+	parse({trig = "ura",name = 'up to'},"\\nearrow"),
 	parse({trig = "lra",name = 'leftrightarrow'},"\\leftrightarrow"),
 	parse({trig = "Lra",name = 'Leftrightarrow'},"\\Leftrightarrow"),
-	parse({trig = "mto",name = 'mapsto'},"\\mto"),
+	parse({trig = "mto",name = 'mapsto'},"\\mapsto"),
+
 	parse({trig = "invs", name = "inverse" }, "^{-1}"),
-	parse({trig = "OO", name = "emptyset" }, "\\O"),
+
+	parse({trig = "OO", name = "Order" }, "\\mathcal{O}"),
+	parse({trig = "oo", name = "Infty" }, "\\infty"),
+	parse({trig = "00", name = "empty" }, "\\emptyset"),
 	parse({trig = "RR", name = "R" }, "\\mathbb{R}"),
 	parse({trig = "QQ", name = "Q" }, "\\mathbb{Q}"),
 	parse({trig = "ZZ", name = "Z" }, "\\mathbb{Z}"),
 	parse({trig = "NN", name = "C" }, "\\mathbb{N}"),
 	parse({trig = "CC", name = "C" }, "\\mathbb{C}"),
 	parse({trig = "UU", name = "cup" }, "\\cup "),
+	parse({trig = "AA", name = "for all" }, "\\forall"),
+	parse({trig = "Re", name = "Reynolds" }, "\\Re"),
+
+
 	parse({trig = "||", name = "mid" }, " \\mid "),
 	parse({trig = "Nn", name = "cap" }, "\\cap "),
 	parse({trig = "cc", name = "subset" }, "\\subset "),
-	
+	parse({trig = "inn", name = "element of" }, "\\in "),
+
+
 	parse({trig = "nabl", name = "nabla" }, "\\nabla$0"),
 
 	parse({trig = "dd", name = "diff_d" }, "\\d "),
-	parse({trig = "td", name = "to the" }, "^{$1} $0"),
-	parse({trig = "__", name = "down" }, "_{$1} $0"),
+	parse({trig = "DD", name = "diff_D" }, "\\Dt "),
 	parse({trig = "tt", name = "text" }, "\\text{$1} $0"),
-	parse({trig = "Dif", name = "" }, "\\frac{D$1}{D$2} $0"),
-	parse({trig = "dif", name = "text" }, "\\frac{\\d$1}{\\d$2} $0"),
-	parse({trig = "part", name = "partial" }, "\\frac{\\partial$1}{\\partial$2} $0"),
 	parse({trig = "del", name = "partial" }, "\\partial $0"),
 
 
@@ -96,8 +134,12 @@ basic_operators = {
 	parse({ trig = "log", name = "log" }, "\\log "),
 	parse({ trig = "exp", name = "exp" }, "\\exp "),
 	parse({ trig = "star", name = "star" }, "\\star "),
+	parse({ trig = "'*", name = "star" }, "\\star "),
 	parse({ trig = "perp", name = "perp" }, "\\perp "),
-	parse({ trig = "int", name = "int" }, "\\int "),
+	parse({ trig = "sup", name = "sup" }, "\\sup "),
+	parse({ trig = "inf", name = "inf" }, "\\inf "),
+	parse({ trig = "max", name = "max" }, "\\max "),
+	parse({ trig = "min", name = "min" }, "\\min "),
 
 	parse({ trig = "arcsin", name = "arcsin" }, "\\arcsin "),
 	parse({ trig = "arctan", name = "arctan" }, "\\arctan "),
@@ -108,18 +150,21 @@ basic_operators = {
 	parse({ trig = "asec", name = "asec" }, "\\arcsec "),
 
 
+}
 
-} 
-
-for _, snip in ipairs(basic_operators) do
+for key, snip in ipairs(word_trig_operators) do
+	snip.priority = key
     snip.condition = pipe({ is_math, no_backslash })
     snip.show_condition = is_math
-    snip.wordTrig = false
+    snip.wordTrig = true
 	table.insert(auto_snippets,snip)
 end
 
-basic_operators_backslash = {	
-	parse({trig = "\\sims",name = 'approx'},"\\approx"),
+basic_operators_backslash = {
+	parse({trig = "\\sim~",name = 'approx'},"\\approx"),
+	parse({trig = "~2",name = 'approx'},"\\approx"),
+	parse({trig = "pto",name = 'propto'},"\\propto"),
+	parse({trig = "\\\\s",name = 'setminus'},"\\setminus"),
 }
 
 for _, snip in ipairs(basic_operators_backslash) do

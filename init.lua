@@ -28,6 +28,9 @@ require("plugin.mason")
 -- Formatter:
 require("plugin.formatter")
 
+-- Folding:
+require("plugin.nvim_ufo")
+
 
 
 

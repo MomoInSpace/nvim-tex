@@ -53,34 +53,65 @@ local bar_node = {
   end, {}),
 }
 
-local ff_node = {
-  f(function(_, snip)
-    return string.format("\\mathbf{%s}", snip.captures[1])
-  end, {}),
-}
+-- Instead use Boldsymbol
+-- local ff_node = {
+--   f(function(_, snip)
+--     return string.format("\\mathbf{%s}", snip.captures[1])
+--   end, {}),
+-- }
 
 local brace_node = {
   f(function(_, snip)
-    return string.format("\\ubrace{%s}", snip.captures[1])
+    return string.format("\\underbrace{%s}", snip.captures[1])
   end, {}),
 }
 
 local bold_node = {
   f(function(_, snip)
-    return string.format("\\boldsymbol %s", snip.captures[1])
+    return string.format("\\boldsymbol{%s}", snip.captures[1])
   end, {}),
 }
 
-local nodearray = 	{vec_node, hat_node, bar_node, ff_node, brace_node, bold_node}
-local trigarray = 	{"vec", "hat", "bar", "ff", "ubrace", "bold"}
+local tilde_node = {
+  f(function(_, snip)
+    return string.format("\\widetilde{%s}", snip.captures[1])
+  end, {}),
+}
+
+local math_bb_node = {
+  f(function(_, snip)
+    return string.format("\\mathbb{%s}", snip.captures[1])
+  end, {}),
+}
+
+local math_cal_node = {
+  f(function(_, snip)
+    return string.format("\\mathcal{%s}", snip.captures[1])
+  end, {}),
+}
+
+local math_prime_node = {
+  f(function(_, snip)
+    return string.format("%s^{\\prime}", snip.captures[1])
+  end, {}),
+}
+
+local math_star_node = {
+  f(function(_, snip)
+    return string.format("%s^{*}", snip.captures[1])
+  end, {}),
+}
+
+local nodearray = 	{vec_node, hat_node, bar_node, bold_node, brace_node, bold_node, tilde_node, math_bb_node, math_cal_node,math_prime_node, math_star_node }
+local trigarray = 	{"vec", "hat", "bar", "ff", "ubrace", "bb","til", "mbb", "mcal", "''", "star"}
 modyfier_auto = {}
 
 
 for key, node in pairs(nodearray) do
 	regex_strings = {
-		"([%a]+)",
+		"([%w]+)",
 		"(\\[%a]+[%{]?[%w]+[%}]?)",
-		"%(([%a,%\\]+)%)"
+		"%(([%a,%\\%{%}_%s%d%+%-%^]+)%)"
 	}
 
 	for regKey, trigString in pairs(regex_strings) do
@@ -118,5 +149,3 @@ ls.add_snippets("tex",tab_snippets, {
 	default_priority = 0,
 	key = "modyfier_tab"
 })
-
-

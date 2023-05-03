@@ -37,8 +37,8 @@ local tab_snippets = {}
 
 -- Tab------------------
 local document_template_tab  = {
-	parse({trig = "latexdoc", name = "template for latex document"}, 
-	[[	
+	parse({trig = "latexdoc", name = "template for latex document"},
+	[[
 	% Preamble
 	% Document Class
 	\documentclass[11pt, oneside, headsepline=on, parskip=half, numbers=enddot, intlimits]{scrbook} % Explanation see below.
@@ -71,11 +71,14 @@ local document_template_tab  = {
 
 	% Symbols
 	\usepackage{mathtools} % also loads amsmath package
+	\usepackage{amsmath} % also loads amsmath package
 	\usepackage{amssymb} % more symbols
 	\usepackage[svgnames, hyperref]{xcolor} % colors
 	\usepackage{graphicx} % graphics
 	\usepackage[all]{xy} % diagrams
 	\usepackage[shortlabels]{enumitem} % better enumerations
+	\usepackage{siunitx}
+	\usepackage{todonotes}
 
 	% Hyperlinks
 	\usepackage[linktoc=page,colorlinks=true,linkcolor=Blue,citecolor=DarkGreen,urlcolor=Black]{hyperref}
@@ -91,7 +94,7 @@ local document_template_tab  = {
 	\newtheorem*{cor}{Corollary}
 
 	% user-defined commands
-	%\newcommand*{\setbuilder}[2]{\left\{ #1\mathrel{} : \mathrel{} \begin{aligned} #2 \end{aligned} \right\}} % Set builder notation
+	%\newcommand*{\setbuilder}[2]{\left\{ #1\mathrel{} : \mathrel{} \begin{aligned} #2 \end{aligned} \right}} % Set builder notation
 	\newcommand*{\quotient}[2]{#1/_{#2}} % Quotients
 	\newcommand*{\restrict}{\mathord{\mbox{\large $\upharpoonright$}}} % Restrictions
 	\renewcommand*{\P}{\mathcal P} % Power Set
@@ -103,6 +106,7 @@ local document_template_tab  = {
 	\newcommand*{\id}{\operatorname{Id}}  % Identity
 	\newcommand*{\sgn}{\operatorname{sgn}} % Sign function
 	\renewcommand*{\d}{\mathop{}\!\mathrm{d}}  % differential d
+	\newcommand*{\Dt}{\text{D}}  % differential d
 
 	% numbers
 	\newcommand*{\N}{\mathbb N}
@@ -171,9 +175,9 @@ local document_template_tab  = {
 	%%%%%%%%%%
 
 	\begin{document}
-		
+
 		\renewcommand*{\partpagestyle}{empty}
-		
+
 		\automark{section}
 		\renewcommand*{\chapterpagestyle}{empty}
 		\ihead{\rightmark}
@@ -182,9 +186,9 @@ local document_template_tab  = {
 		\ifoot{}
 		\cfoot{}
 		\ofoot{}
-		
+
 		\pagenumbering{Alph}
-		
+
 		\begin{titlepage}
 			\centering
 			\vspace*{4cm}
@@ -195,12 +199,12 @@ local document_template_tab  = {
 			%\includegraphics[width=\textwidth]{Images/title_cosine}
 			\vfill
 		\end{titlepage}
-		
+
 		\pagenumbering{roman}
 		\tableofcontents
 		\cleardoubleoddpage
 		\pagenumbering{arabic}
-		
+
 	\part{$2}
 		$0,
 	\\appendix,

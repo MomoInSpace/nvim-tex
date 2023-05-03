@@ -34,7 +34,7 @@ local auto_snippets = {}
 local tab_snippets = {}
 
 --# Start of Snippets -----------------------------------------({{
-	
+
 
 --# math environments -----------------------------------------({{
 
@@ -62,17 +62,17 @@ rec_align = function()
 		}),
 	});
 end
-	
+
 local math_envs_tab = {
 	-- Begin/End
-	parse({trig = "beg", name = "begin_env"}, 
+	parse({trig = "beg", name = "begin_env"},
 	[[
 	\\begin{$1}
 		$2
 	\\end{$1} $0
 	]]),
 	-- Equation
-	parse({trig = "equ", name = "begin_equation"}, 
+	parse({trig = "equ", name = "begin_equation"},
 	[[
 	\\begin{equation}
 		$1
@@ -80,33 +80,33 @@ local math_envs_tab = {
 	\\end{equation} $0
 	]]),
 	-- Aligned
-	parse({trig = "ali", name = "begin_align*"}, 
+	parse({trig = "ali", name = "begin_align*"},
 	[[
 	\\begin{aligned}
 		$1
 	\\end{aligned} $0
 	]]),
 	-- Aligne*
-	parse({trig = "alis", name = "begin_align*"}, 
+	parse({trig = "alis", name = "begin_align*"},
 	[[
 	\\begin{align*}
 		$1
 	\\end{align*} $0
 	]]),
 	-- Equation Aligned
-	parse({trig = "eqa", name = "begin_equation_aligned"}, 
+	parse({trig = "ale", name = "begin_equation_aligned"},
 	[[
 	\\begin{equation}
 		\\begin{aligned}
 			$1
-		\\end{aligned} 
+		\\end{aligned}
 		\\label{eq_$2}
 	\\end{equation}$0
 	]]),
 	-- \label:
 	parse({trig = "lab", name = "label"}, "\\label{$1}$0"),
 	-- figure
-	parse({trig = "fig", name = "figure"}, 
+	parse({trig = "fig", name = "figure"},
 	[[
 	\begin{figure}[${1:htpb}]
 		\centering
@@ -114,6 +114,26 @@ local math_envs_tab = {
 		\caption{$3}
 		\label{fig_$4}
 	\end{figure} $0
+	]]),
+	parse({trig = "figs", name = "figure"},
+	[[
+	\begin{figure}[${1:htpb}]
+		\centering
+		$2
+		\hfill
+		$3
+		\caption{$4}
+		\label{fig_$5}
+	\end{figure} $0
+	]]),
+	parse({trig = "subfig", name = "subfigure"},
+	[[
+     \begin{subfigure}[b]{0.49\textwidth}
+	\centering
+	\includegraphics[width=1\textwidth]{$1}
+	\caption{$2}
+	\label{fig_sub_$3}
+     \end{subfigure} $0
 	]]),
 	-- list
 	s("ls", {
@@ -138,8 +158,8 @@ local math_envs_tab = {
 	t({"\\begin{equation}"}),
 	t({"","\t\\begin{aligned}"}),
 	t({"","\t\t"}), i(1),t(" &= "), i(2), t("\\\\"), d(3, rec_align, {}),
-	t({"","\t\\end{aligned}"}), 
-	t({"","\t\\label{eq_"}),i(4),t({"}"}), 
+	t({"","\t\\end{aligned}"}),
+	t({"","\t\\label{eq_"}),i(4),t({"}"}),
 	t({"", "\\end{equation}"}), i(0)
 	}),
 }
@@ -163,19 +183,40 @@ end
 
 -- }})
 
+--# Theorems -----------------------------------------({{
+
+local theorems_tab = {
+	parse({trig = "de", name = "Defintion"},"\\begin{de}[$1]\n $2 \n\\label{de_$1}\n\\end{de}\n$0"),
+	parse({trig = "rem", name = "Remark"},"\\begin{rem}[$1]\n $2 \n\\label{rem_$1}\n\\end{rem}\n$0"),
+	parse({trig = "ex", name = "Example"},"\\begin{ex}[$1]\n $2 \n\\label{ex_$1}\n\\end{ex}\n$0"),
+
+	parse({trig = "lem", name = "Lemma"},"\\begin{lem}[$1]\n $2 \n\\label{lem_$1}\n\\end{lem}\n$0"),
+	parse({trig = "thm", name = "Theorem"},"\\begin{thm}[$1]\n $2 \n\\label{thm_$1}\n\\end{thm}\n$0"),
+	parse({trig = "cor", name = "Corollary"},"\\begin{cor}[$1]\n $2 \n\\label{cor_$1}\n\\end{cor}\n$0"),
+
+}
+
+for key, snip in ipairs(theorems_tab)  do
+	snip.priority = key
+    snip.wordTrig = false
+	table.insert(tab_snippets,snip)
+end
+-- }})
+
 --# sections -----------------------------------------({{
 
 local sections_tab = {
-	-- part:
 	parse({trig = "part", name = "part"},"\\part{$1}\n$0"),
-	-- chapter:
 	parse({trig = "chap", name = "chapter"},"\\chapter{$1}\n$0"),
-	-- section:
 	parse({trig = "sec", name = "section"},"\\section{$1}\n$0"),
-	-- subsection:
 	parse({trig = "sub", name = "subsection"},"\\subsection{$1}\n$0"),
-	-- subsubsection:
-	parse({trig = "subsub", name = "subsubsection"},"\\subsubsection{$1}\n$0"),
+	parse({trig = "sub2", name = "subsubsection"},"\\subsubsection{$1}\n$0"),
+
+	parse({trig = "part*", name = "part"},"\\part*{$1}\n$0"),
+	parse({trig = "chap*", name = "chapter"},"\\chapter*{$1}\n$0"),
+	parse({trig = "sec*", name = "section"},"\\section*{$1}\n$0"),
+	parse({trig = "sub*", name = "subsection"},"\\subsection*{$1}\n$0"),
+	parse({trig = "sub2*", name = "subsubsection"},"\\subsubsection*{$1}\n$0"),
 }
 
 for key, snip in ipairs(sections_tab) do
@@ -189,11 +230,11 @@ end
 
 local text_snippets_tab = {
 	-- emphasize
-	parse({trig = "emp", name = "emphasize"},"\\emph{$1} $0"),
+	parse({trig = "emp", name = "emphasize"},"\\emph{$1}$0"),
 	-- textbf
-	parse({trig = "bf", name = "textbf"},"\\textbf{$1} $0"),
-	parse({trig = "ref", name = "ref"},"\\ref{$1} $0"),
-	parse({trig = "eref", name = "ref equation"},"\\eqref{$1} $0"),
+	parse({trig = "bf", name = "textbf"},"\\textbf{$1}$0"),
+	parse({trig = "ref", name = "ref"},"\\ref{$1}$0"),
+	parse({trig = "eqr", name = "ref equation"},"\\eqref{eq_$1}$0"),
 }
 
 for key, snip in ipairs(text_snippets_tab) do
@@ -205,6 +246,7 @@ end
 
 -- }})
 
+
 ls.add_snippets("tex",auto_snippets, {
 	default_priority = 0,
 	type = "autosnippets",
@@ -215,5 +257,3 @@ ls.add_snippets("tex",tab_snippets, {
 	default_priority = 0,
 	key = "environments_tab"
 })
-
-
